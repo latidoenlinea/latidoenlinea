@@ -37,7 +37,7 @@ class Controlador {
         formData.append("frame", blob, "frame.jpg")
 
         try {
-            const response = await fetch("http://localhost:5000/process_video", {
+            const response = await fetch("https://api-web-xz9e.onrender.com/process_video", {
                 method: "POST",
                 body: formData
             })
@@ -88,7 +88,7 @@ class Controlador {
     }
 
     exportarDatos() {
-        fetch("http://localhost:5000/guardar_datos_excel", {
+        fetch("https://api-web-xz9e.onrender.com/guardar_datos_excel", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
