@@ -146,6 +146,8 @@ canvas {
     font-style: bold;
     font-size: 20px;
     border-radius: 15px;
+    color: #3e20bc;
+    font-weight: 500;
 }
 
 #closePopup:hover {
