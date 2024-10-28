@@ -67,7 +67,7 @@ class Controlador {
     calcularBPM(bpmFrente) {
         console.log(bpmFrente)
 
-        if(bpmFrente == null){
+        if(bpmFrente == undefined){
             const bpmTitulo = document.querySelector(".bpmForehead")
 
             bpmTitulo.textContent = 'BPM Frente: Estimando...'
