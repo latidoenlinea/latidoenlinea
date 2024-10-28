@@ -56,7 +56,6 @@ class Controlador {
                     bpmForehead: data.bpmForehead
                 })
             }
-            console.log(data.bpm_forehead)
             this.calcularBPM(data.bpm_forehead)
 
         } catch (error) {
@@ -66,8 +65,6 @@ class Controlador {
     }
 
     calcularBPM(bpmFrente) {
-        console.log(bpmFrente)
-
         if(bpmFrente == undefined){
             const bpmTitulo = document.querySelector(".bpmForehead")
 
