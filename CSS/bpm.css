@@ -142,7 +142,7 @@ canvas {
 }
 
 #closePopup{
-    background-color: #e65c00;
+    background-color: yellow;
     cursor: pointer;
     padding: 10px 20px;
     font-style: bold;
@@ -151,11 +151,11 @@ canvas {
 }
 
 #closePopup:hover {
-    background-color: #ff6600;
+    background-color: yellow;
 }
 
 .boton-aceptar:hover {
-    background-color: #e65c00;
+    background-color: yellow;
 }
 
 .popup h2{
