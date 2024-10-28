@@ -8,11 +8,11 @@ class Vista{
 
             this.main.append(this.crearTexto("Tu ritmo cardíaco es: ", "bpmForehead", "bpms"))
 
-            this.body.querySelector('.inicio').appendChild(this.input({id: "btnIniciar", type: "submit", value: "Iniciar", class: ["boton", "oculto"]}))
+            this.body.querySelector('.content').appendChild(this.input({id: "btnIniciar", type: "submit", value: "Iniciar", class: ["boton", "oculto"]}))
             this.btnIniciar = this.body.querySelector('#btnIniciar')
             this.btnIniciar.addEventListener("click", this.btnIniciar_click)
 
-            this.body.querySelector('.inicio').appendChild(this.input({id: "btnDetener", type: "submit", value: "Detener", class: ["boton", "oculto"]}))
+            this.body.querySelector('.content').appendChild(this.input({id: "btnDetener", type: "submit", value: "Detener", class: ["boton", "oculto"]}))
             this.btnDetener = this.body.querySelector('#btnDetener')
             this.btnDetener.addEventListener("click", this.btnDetener_click)
         }
