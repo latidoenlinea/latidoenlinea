@@ -130,7 +130,7 @@ canvas {
 .boton-aceptar {
     margin-top: auto;
     margin: 5px 10px;
-    background-color: yellow;
+    background-color: #3e20bc;
     color: white;
     border: none;
     border-radius: 5px;
@@ -141,7 +141,7 @@ canvas {
 }
 
 #closePopup{
-    background-color: yellow;
+    background-color: #3e20bc;
     cursor: pointer;
     padding: 10px 20px;
     font-style: bold;
