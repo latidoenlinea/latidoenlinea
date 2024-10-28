@@ -121,8 +121,6 @@ canvas {
     max-width: 500px;
     width: 90%;
     text-align: center;
-    /* align-self: center;  Añadido aquí */
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -151,11 +149,11 @@ canvas {
 }
 
 #closePopup:hover {
-    background-color: yellow;
+    background-color: rgb(255, 183, 0);
 }
 
 .boton-aceptar:hover {
-    background-color: yellow;
+    background-color: rgb(255, 183, 0);
 }
 
 .popup h2{
