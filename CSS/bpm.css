@@ -131,13 +131,13 @@ canvas {
     margin-top: auto;
     margin: 5px 10px;
     background-color: yellow;
-    color: #3e20bc;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     align-self: center;
-    font-weight: 500;
+    font-weight: 800;
 }
 
 #closePopup{
@@ -147,8 +147,8 @@ canvas {
     font-style: bold;
     font-size: 20px;
     border-radius: 15px;
-    color: #3e20bc;
-    font-weight: 500;
+    color: white;
+    font-weight: 800;
 }
 
 #closePopup:hover {
