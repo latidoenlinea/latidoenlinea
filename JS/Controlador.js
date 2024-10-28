@@ -61,6 +61,7 @@ class Controlador {
 
         } catch (error) {
             console.error("Error al comunicar con la API", error)
+            document.querySelector(".bpmForehead").textContent = "Error al comunicar con la API"
         }
     }
 
