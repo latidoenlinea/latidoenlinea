@@ -56,7 +56,7 @@ class Controlador {
                     bpmForehead: data.bpmForehead
                 })
             }
-            this.calcularBPM(data.bpm_forehead)
+            this.calcularBPM(data)
 
         } catch (error) {
             console.error("Error al comunicar con la API", error)
@@ -65,18 +65,14 @@ class Controlador {
     }
 
     calcularBPM(bpmFrente) {
-        if(bpmFrente == undefined){
+        if(bpmFrente.bpm == "No se detectaron rostros en la imagen"){
             const bpmTitulo = document.querySelector(".bpmForehead")
 
-            bpmTitulo.textContent = 'BPM Frente: Estimando...'
-        }
+            bpmTitulo.textContent = 'No se detectaron rostros en la imagen'
+        } else if(bpmFrente.bpm != "No se detectaron rostros en la imagen"){
+            const bpmTitulo = document.querySelector(".bpmForehead")
 
-        const bpmForeheadElement = document.querySelector(".bpmForehead")
-
-        if (bpmForeheadElement) {
-            bpmForeheadElement.textContent = `BPM Frente: ${bpmFrente}`
-        } else {
-            console.error("Elemento BPM Frente no encontrado")
+            bpmTitulo.textContent = `BPM Frente: ${bpmFrente.bpm}`
         }
     }
 
