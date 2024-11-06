@@ -62,7 +62,7 @@ class Vista{
     
             setInterval(() => {
                 controlador.enviarFrame(video)
-            }, 500)
+            }, 1000)
         })
     
         navigator.mediaDevices.getUserMedia({video: true})
