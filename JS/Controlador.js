@@ -37,7 +37,7 @@ class Controlador {
         formData.append("frame", blob, "frame.jpg")
 
         try {
-            const response = await fetch("https://api-web-xz9e.onrender.com/process_video", {
+            const response = await fetch("latidoenlinea.pythonanywhere.com/process_video", {
                 method: "POST",
                 body: formData
             })
