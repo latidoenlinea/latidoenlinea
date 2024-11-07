@@ -37,7 +37,7 @@ class Controlador {
         formData.append("frame", blob, "frame.jpg")
 
         try {
-            const response = await fetch("latidoenlinea.pythonanywhere.com/", {
+            const response = await fetch("latidoenlinea.pythonanywhere.com", {
                 method: "POST",
                 body: formData
             })
