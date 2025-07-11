@@ -4,7 +4,12 @@ class Controlador {
             this.monitoreo = false
             this.datosCapturados = []
             this.nombreUsuario = ""
+            this.sessionId = this.generateSessionId()
         }
+    }
+
+    generateSessionId(){
+        
     }
 
     async enviarFrame(video) {
