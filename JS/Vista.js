@@ -3,20 +3,81 @@ class Vista{
         if(reset == true){
             this.main = document.querySelector("main")
             this.body = document.body
+            this.videoElement = null
+            this.btnIniciar = null
+            this.btnDetener = null
+            this.stream = null
+            this.evenListeners = []
 
-            this.agregarCamara("camara", "video-camara")
-
-            this.main.append(this.crearTexto("Tu ritmo cardíaco es: ", "bpmForehead", "bpms"))
-
-            this.body.querySelector('.content').appendChild(this.input({id: "btnIniciar", type: "submit", value: "Iniciar", class: ["botones", "oculto"]}))
-            this.btnIniciar = this.body.querySelector('#btnIniciar')
-            this.btnIniciar.addEventListener("click", this.btnIniciar_click)
-
-            this.body.querySelector('.content').appendChild(this.input({id: "btnDetener", type: "submit", value: "Detener", class: ["botones", "oculto"]}))
-            this.btnDetener = this.body.querySelector('#btnDetener')
-            this.btnDetener.addEventListener("click", this.btnDetener_click)
+            this.inicializarInterfaz()
         }
     }
+
+    inicializarInterfaz(){
+        if(this.main){
+            this.main.innerHTML = ""
+        }
+
+        this.agregarCamara("camara", "video-camara")
+
+        this.main.append(this.crearTexto("Tu ritmo cardíaco es: ", "bpmForehead", "bpms"))
+
+        const botonesContainer = document.createElement("div")
+        botonesContainer.className = "botones-container"
+
+        this.btnIniciar = this.input({
+            id: "btnIniciar",
+            type: "button",
+            value: "Iniciar monitoreo",
+            class: ["btn", "btn-iniciar"]
+        })
+
+        this.btnDetener = this.input({
+            id: "btnDetener",
+            type: "button",
+            value: "Detener monitoreo",
+            class: ["btn", "btn-detener"]
+        })
+
+        this.btnDetener.disabled = true
+
+        botonesContainer.appendChild(this.btnIniciar)
+        botonesContainer.appendChild(this.btnDetener)
+
+        this.body.querySelector(".content").appendChild(botonesContainer)
+
+        this.agregarEventListeners()
+    }
+
+    agregarEventListeners(){
+        this.limpiearEventListeners()
+
+        const iniciarListener = this.btnIniciar_click.bind(this)
+        const detenerListener = this.btnDetener_click.bind(this)
+
+        this.btnIniciar.addEventListener("click", iniciarListener)
+        this.btnDetener.addEventListener("click", detenerListener)
+
+        this.evenListeners.push({
+            element: this.btnIniciar,
+            event: "click",
+            handler: iniciarListener
+        })
+
+        this.evenListeners.push({
+            element: this.btnDetener,
+            event: "click",
+            handler: detenerListener
+        })
+    }
+
+    limpiearEventListeners(){
+        this.evenListeners.forEach(listener =>{
+            listener.element.removeEventListener(listener.event, listener.handler)
+        })
+        this.evenListeners = []
+    }
+
 
     crearTexto(text, clase, id) {
         const heading = document.createElement("h1")
@@ -41,13 +102,53 @@ class Vista{
     }
 
     btnIniciar_click(){
-        controlador.iniciarMonitoreo()
-        console.log("Monitoreo iniciado")
+        if(!window.controlador){
+            this.mensaje("Error: Controlador no inicializado")
+            return
+        }
+
+        if(!this.videoElement || !this.stream){
+            this.mensaje("Error: Cámara no disponible")
+            return
+        }
+
+        const iniciado = window.controlador.iniciarMonitoreo()
+        
+        if(iniciado){
+            this.btnIniciar.disabled = true
+            this.btnIniciar.classList.add("deshabilitado")
+            this.btnDetener.disabled = false
+            this.btnDetener.classList.remove("deshabilitado")
+
+            const bpmElement = document.querySelector(".bpmForehead")
+            if(bpmElement){
+                bpmElement.textContent = "Iniciando monitoreo..."
+                bpmElement.className = "bpmForehead iniciando"
+            }
+
+            console.log("Monitoreo iniciado desde vista")
+        }
     }
 
     btnDetener_click(){
-        controlador.detenerMonitoreo()
-        console.log("Monitoreo detenido")
+        if(!window.controlador){
+            this.mensaje("Error: Controlador no inicializado")
+            return
+        }
+
+        window.controlador.detenerMonitoreo()
+
+        this.btnIniciar.disabled = false
+        this.btnIniciar.classList.remove("deshabilitado")
+        this.btnDetener.disabled = true
+        this.btnDetener.classList.add("deshabilitado")
+
+        const bpmElement = document.querySelector(".bpmForehead")
+        if(bpmElement){
+            bpmElement.textContent = "Monitoreo detenido"
+            bpmElement.className = "bpmForehead detenido"
+        }
+        console.log("Monitoreo detenido desde vista")
     }
 
     agregarCamara(id, clase){
@@ -56,28 +157,130 @@ class Vista{
         video.id = id
         video.classList.add(clase)
         video.autoplay = true
+        video.muted = true
+        video.playsInline = true
+
+        this.videoElement = video
     
-        video.addEventListener('play', () => {
-            console.log("Video en reproducción")
-    
-            setInterval(() => {
-                controlador.enviarFrame(video)
-            }, 1000)
+        video.addEventListener("loadedmetadata", () => {
+            console.log("Video metadata cargada")
+            console.log("Dimensions: ${video.videoWidth}x${video.videoHeight}")
         })
-    
-        navigator.mediaDevices.getUserMedia({video: true})
-            .then(stream => {
-                video.srcObject = stream
-            })
-            .catch((error) => {
-                console.error("Error al acceder a la cámara web", error)
-                this.mensaje("No se pudo acceder a la cámara web")
-            })
-    
+
+        video.addEventListener("canplay", () => {
+            console.log("Video puede reproducirse")
+        })
+
+        video.addEventListener("play", () => {
+            console.log("Video en reproducción")
+        })
+
+        video.addEventListener("error", (e) => {
+            console.error("Error en el video: ", e)
+            this.mensaje("Error al reproducir el video")
+        })
+
+        this.solicitarAccesoCamara(video)
+
         this.main.append(video)
     }
 
+    async solicitarAccesoCamara(video){
+        try{
+            const constraints = {
+                video: {
+                    with: { ideal: 640},
+                    height: { ideal: 480},
+                    frameRate: { ideal: 30, max: 30},
+                    facingMode: "user"
+                },
+                audio: false
+            }
+
+            const stream = await navigator.mediaDevices.getUserMedia(constraints)
+            this.stream = stream
+            video.srcObject = stream
+
+            await new Promise((resolve) => {
+                video.onloadedmetadata = () => {
+                    video.play()
+                    resolve()
+                }
+            })
+            console.log("Acceso a la cámara concedido")
+        
+        }catch(error){
+            console.error("Error al acceder a la cámara: ", error)
+
+            let mensajeError = "No se pudo acceder a la cámara web"
+
+            if(error.name == "NotAllowedError"){
+                mensajeError = "Permiso denegado. Por favor, permita el acceso a la cámara."
+            } else if(error.name == "NotFoundError"){
+                mensajeError = "No se encontró ninguna cámara disponible."
+            } else if(error.name == "NotReadableError"){
+                mensajeError = "La cámara está siendo usada por otra aplicación."
+        }
+        this.mensaje(mensajeError)
+        this.mostrarErrorCamara()
+        }
+    }
+
+    mostrarErrorCamara(){
+        const errorDiv = document.createElement("div")
+        errorDiv.className = "error-camara"
+        errorDiv.innerHTML = `
+            <div class="error-icon">📷</div>
+            <h3>Error de Cámara</h3>
+            <p>No se pudo acceder a la cámara web.</p>
+            <button class="btn-reintentar" onclick="window.vista.reiniciarCamara()">
+                Reintentar
+            </button>
+        `
+
+        if(this.videoElement && this.videoElement.parentNode){
+            this.videoElement.parentNode.replaceChild(errorDiv, this.videoElement)
+        }
+    }
+
+    reiniciarCamara(){
+        this.limpiarStream()
+        this.inicializarInterfaz()
+    }
+
+    limpiarStream(){
+        if(this.stream){
+            this.stream.getTracks().forEach(track => track.stop())
+            this.stream = null
+        }
+    }
+
     mensaje(texto){
+        if("Notification" in window && Notification.permission == "granted") {
+            new Notification("Latido en Línea", { 
+                body: texto, 
+                icon: "IMG/logo.png"
+            })
+        }
         alert(texto)
     }
+
+    async solicitarPermisoNotificaciones(){
+        if("Notification" in window && Notification.permission == "default") {
+            await Notification.requestPermission()
+        }
+    }
+
+    destruir(){
+        this.limpiearEventListeners()
+        this.limpiarStream()
+
+        if(window.controlador){
+            window.controlador.limpiarRecursos()
+        }
+
+        console.log("Vista destruida y recursos liberados")
+    }
+
+
 }
