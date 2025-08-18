@@ -1,31 +1,32 @@
-body{
+/* --- ESTILOS BASE (ESCRITORIO) --- */
+body {
     font-family: Arial, sans-serif;
     background-color: #3e20bc;
     margin: 0;
     padding: 0;
 }
+
 nav {
-    /* text-align: center; */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.1px 20px;
-    position: relative;
+    padding: 5px 20px;
 }
 
 .menu {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .menu li {
-    display: inline;
-    margin-right: 15px;
+    margin: 5px 10px;
 }
 
-.menu a{
+.menu a {
     text-decoration: none;
     color: white;
     font-size: 15px;
@@ -47,47 +48,46 @@ nav {
     transition: transform 0.3s ease-in-out;
 }
 
-.menu a:hover::after, .menu a.active::after {
+.menu a:hover::after,
+.menu a.active::after {
     transform: scaleX(1);
     transform-origin: left;
 }
 
 .menu a:hover {
-    color: rgb(137, 137, 1)
+    color: rgb(137, 137, 1);
 }
 
 .logo img {
-    width: 150px; /* Ajusta el tamaño del logo según sea necesario */
+    width: 150px;
     height: auto;
 }
 
-.content{
+.content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 50px;
     max-width: 1200px;
     margin: 0 auto;
+    gap: 20px;
 }
 
-.text-content{
+.text-content {
     flex: 1;
 }
 
-.text-content h1{
+.text-content h1 {
     font-size: 48px;
     color: white;
     margin-bottom: 20px;
-    font-weight: 5;
-    margin: 0;
 }
 
-.text-content h2{
+.text-content h2 {
     font-size: 60px;
     margin-bottom: 20px;
     color: white;
     font-weight: 800;
-    margin: 0;
 }
 
 .text-content p {
@@ -113,14 +113,59 @@ nav {
     text-decoration: none;
     background-color: yellow;
     color: #2e0096;
-    border: none;
-    padding: 15px 80px;
+    padding: 15px 50px;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
     border-radius: 30px;
+    display: inline-block;
 }
 
-.cta-button:hover{
+.cta-button:hover {
     background-color: rgb(255, 183, 0);
+}
+
+/* --- MEDIA QUERIES PARA MÓVILES --- */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .text-content h1 {
+        font-size: 32px;
+    }
+
+    .text-content h2 {
+        font-size: 40px;
+    }
+
+    .text-content p {
+        font-size: 16px;
+        max-width: 100%;
+    }
+
+    .image-content {
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu li {
+        margin: 8px 0;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+
+    .cta-button {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
 }
