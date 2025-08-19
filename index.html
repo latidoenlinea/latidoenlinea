@@ -15,7 +15,13 @@
         <div class="logo">
             <img src="IMG/logo.png" alt="Latido en Línea">
         </div>
-        <ul class="menu">
+        <!-- Agregando botón hamburguesa para móviles -->
+        <button class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="menu" id="menu">
             <!-- <li><a href="">INICIO</a></li> -->
             <li><a href="contacto.html">CONTACTO</a></li>
             <li><a href="conocenos.html">CONÓCENOS</a></li>
@@ -38,6 +44,14 @@
             <img src="IMG/imagen-index.png" alt="Latido en Línea">
         </div>
     </section>
+
+    <!-- Agregando JavaScript para controlar el menú móvil -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 
 </body>
 </html>
