@@ -17,6 +17,12 @@
         <div class="logo">
             <img src="IMG/logo.png" alt="Latino en Línea">
         </div>
+        <!-- agregando botón hamburguesa para móviles -->
+        <button class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <ul class="menu">
             <li><a href="index.html">INICIO</a></li>
             <li><a href="informacion.html">INFORMACIÓN</a></li>
@@ -52,5 +58,12 @@
         </div>
     </div>
 
+    <!-- agregando JavaScript para controlar menú móvil -->
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
