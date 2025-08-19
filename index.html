@@ -11,33 +11,43 @@
 
     <!-- MENU -->
 
-    <nav>
+    <header>
+    <nav class="navbar">
         <div class="logo">
-            <img src="IMG/logo.png" alt="Latido en Línea">
+        <img src="IMG/logo.png" alt="Logo">
         </div>
-        <ul class="menu">
-            <!-- <li><a href="">INICIO</a></li> -->
-            <li><a href="contacto.html">CONTACTO</a></li>
-            <li><a href="conocenos.html">CONÓCENOS</a></li>
-            <li><a href="informacion.html">SABER MÁS</a></li>
+        <button class="menu-toggle" id="menu-toggle">☰</button>
+        <ul class="menu" id="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="bpm.html">Monitoreo</a></li>
+        <li><a href="informacion.html">Información</a></li>
+        <li><a href="conocenos.html">Conócenos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
         </ul>
     </nav>
+    </header>
 
     <!-- FIN DE MENU -->
 
     <!-- INICIO -->
      
-    <section class="content">
-        <div class="text-content">
-            <h1>A TU ALCANCE</h1>
-            <h2>LATIDO EN LINEA</h2>
-            <p>Monitorea tu ritmo cardíaco fácilmente usando solo tu rostro. Cuida tu salud sin necesidad de un oxímetro u otros aparatos costosos, obteniendo mediciones directamente desde tu computadora.</p>
-            <a href="bpm.html" class="cta-button">EMPIEZA YA</a>
-        </div>
-        <div class="image-content">
-            <img src="IMG/imagen-index.png" alt="Latido en Línea">
+    <main>
+    <section class="contenedor">
+        <h1>Bienvenido a Latido en Línea</h1>
+        <div class="video-container">
+        <video id="camara" autoplay playsinline></video>
+        <canvas id="canvas"></canvas>
         </div>
     </section>
+    </main>
+
+    <script src="JS/index.js"></script>
+    <script>
+    // Menú hamburguesa
+    document.getElementById("menu-toggle").addEventListener("click", function() {
+        document.getElementById("menu").classList.toggle("active");
+    });
+    </script>
 
 </body>
 </html>
