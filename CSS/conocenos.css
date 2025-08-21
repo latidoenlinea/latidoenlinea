@@ -4,8 +4,8 @@ body {
   margin: 0;
   padding: 0;
 }
+
 nav {
-  /* text-align: center; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -62,65 +62,12 @@ nav {
   height: auto;
 }
 
-.titulo {
-  text-align: center;
-  color: white;
-  font-size: 24px;
-  line-height: 0.5;
-}
-
-.content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px;
-  max-width: 1200px;
-  margin: 10px auto;
-  gap: 50px;
-  flex-wrap: wrap;
-}
-
-h2 {
-  color: yellow;
-  margin-bottom: 1px;
-  font-size: 24px;
-}
-
-.text-content-1,
-.text-content-2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 10px;
-  flex: 1;
-  min-width: 250px; /* Asegura que no se reduzcan demasiado en pantallas pequeñas */
-}
-
-p {
-  color: white;
-  font-size: 19px;
-  text-align: justify;
-}
-
-.persona {
-  width: 100%;
-  max-width: 280px;
-  height: auto;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 5px solid yellow;
-}
-
 /* Agregando estilos para el botón hamburguesa */
 .hamburger {
   display: none;
   flex-direction: column;
-  background: none;
-  border: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 10px;
 }
 
 .hamburger span {
@@ -131,46 +78,106 @@ p {
   transition: 0.3s;
 }
 
-/* Agregando media queries para dispositivos móviles */
+.titulo {
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  line-height: 0.5;
+}
+
+.titulo p {
+  font-size: 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.text-content {
+  flex: 1;
+}
+
+.text-content h2 {
+  font-size: 30px;
+  color: white;
+  /* margin-bottom: 0px; */
+  font-weight: 750;
+  margin: 0;
+}
+
+.text-content h3 {
+  font-size: 20px;
+  color: white;
+  font-weight: 700;
+}
+
+.text-content p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  line-height: 0;
+  color: yellow;
+}
+
+.img-content {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.img-content img {
+  max-width: 60%;
+  height: auto;
+}
+
+/* Agregando media queries para responsividad móvil */
 @media screen and (max-width: 768px) {
   nav {
-    /* Cambiando a row para mantener logo y hamburguesa en línea */
     flex-direction: row;
-    padding: 10px;
-    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
   }
 
-  .logo img {
-    width: 120px;
-    /* Removiendo margin-bottom para mantener alineación */
-  }
-
-  /* Mostrando botón hamburguesa en móviles */
+  /* Mostrando botón hamburguesa y ocultando menú en móviles */
   .hamburger {
     display: flex;
   }
 
-  /* Ocultando menú por defecto en móviles */
   .menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    right: 0;
+    width: 100%;
     background-color: #3e20bc;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
 
-  /* Mostrando menú cuando está activo */
   .menu.active {
     display: flex;
   }
 
   .menu li {
-    display: block;
     margin: 10px 0;
+    text-align: center;
+  }
+
+  .menu a {
+    font-size: 16px;
+    padding: 15px;
+    display: block;
+    width: 100%;
+  }
+
+  .logo img {
+    width: 120px;
   }
 
   .titulo {
@@ -178,55 +185,71 @@ p {
     padding: 0 10px;
   }
 
+  .titulo p {
+    font-size: 16px;
+  }
+
   .content {
     flex-direction: column;
-    padding: 15px;
+    padding: 20px 15px;
     gap: 30px;
   }
 
-  .text-content-1,
-  .text-content-2 {
-    min-width: 100%;
-  }
-
-  h2 {
-    font-size: 22px;
-  }
-
-  p {
-    font-size: 16px;
+  .text-content h2 {
+    font-size: 24px;
     text-align: center;
   }
 
-  .persona {
-    max-width: 200px;
+  .text-content h3 {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .text-content p {
+    font-size: 16px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .img-content {
+    justify-content: center;
+  }
+
+  .img-content img {
+    max-width: 80%;
   }
 }
 
 @media screen and (max-width: 480px) {
+  .logo img {
+    width: 100px;
+  }
+
   .titulo {
     font-size: 18px;
   }
 
-  h2 {
-    font-size: 20px;
-  }
-
-  p {
+  .titulo p {
     font-size: 14px;
   }
 
-  .persona {
-    max-width: 150px;
-  }
-
   .content {
-    padding: 10px;
-    gap: 20px;
+    padding: 15px 10px;
   }
 
-  /* Ajustes adicionales para pantallas muy pequeñas */
-  .hamburger span {
-    width: 20px;
+  .text-content h2 {
+    font-size: 20px;
+  }
+
+  .text-content h3 {
+    font-size: 16px;
+  }
+
+  .text-content p {
+    font-size: 14px;
+  }
+
+  .img-content img {
+    max-width: 90%;
   }
 }
