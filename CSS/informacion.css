@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 nav {
   /* text-align: center; */
   display: flex;
@@ -74,12 +75,10 @@ nav {
 .content {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* Cambia a flex-start para mejor alineación en móviles */
-  padding: 20px;
+  align-items: center;
+  padding: 50px;
   max-width: 1200px;
-  margin: 10px auto;
-  gap: 50px; /* Reduce el espacio entre elementos */
-  flex-wrap: wrap; /* Permite que los elementos se muevan a la siguiente línea */
+  margin: 0 auto;
 }
 
 h2 {
