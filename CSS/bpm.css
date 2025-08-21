@@ -216,32 +216,64 @@ canvas {
   background-color: rgb(255, 183, 0);
 }
 
+/* Agregando estilos para el botón hamburguesa */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
 /* Agregando media queries para dispositivos móviles */
 @media screen and (max-width: 768px) {
   nav {
-    flex-direction: column;
+    /* Cambiando a row para mantener logo y hamburguesa en línea */
+    flex-direction: row;
     padding: 10px;
     text-align: center;
   }
 
   .logo img {
     width: 120px;
-    margin-bottom: 10px;
+    /* Removiendo margin-bottom para mantener alineación */
   }
 
+  /* Mostrando botón hamburguesa en móviles */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Ocultando menú por defecto en móviles */
   .menu {
-    margin-top: 10px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #3e20bc;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Mostrando menú cuando está activo */
+  .menu.active {
+    display: flex;
   }
 
   .menu li {
     display: block;
-    margin: 5px 0;
-  }
-
-  .content {
-    flex-direction: column;
-    padding: 20px;
-    text-align: center;
+    margin: 10px 0;
   }
 
   .camara-content {
@@ -313,5 +345,10 @@ canvas {
 
   .bpmForehead {
     font-size: 20px;
+  }
+
+  /* Ajustes adicionales para pantallas muy pequeñas */
+  .hamburger span {
+    width: 20px;
   }
 }
