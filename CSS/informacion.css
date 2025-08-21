@@ -167,12 +167,8 @@ p {
   }
 
   .menu li {
+    display: block;
     margin: 10px 0;
-  }
-
-  .menu a {
-    font-size: 14px;
-    padding: 8px 12px;
   }
 
   .logo img {
